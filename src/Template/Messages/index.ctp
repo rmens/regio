@@ -22,13 +22,6 @@
                 <th scope="col"><?= $this->Paginator->sort('voice_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('start_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('end_date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('monday') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('tuesday') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('wednesday') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('thursday') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('friday') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('saturday') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sunday') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('ends') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('active') ?></th>
@@ -45,13 +38,6 @@
                 <td><?= $message->has('voice') ? $this->Html->link($message->voice->name, ['controller' => 'Voices', 'action' => 'view', $message->voice->id]) : '' ?></td>
                 <td><?= h($message->start_date) ?></td>
                 <td><?= h($message->end_date) ?></td>
-                <td><?= h($message->monday) ?></td>
-                <td><?= h($message->tuesday) ?></td>
-                <td><?= h($message->wednesday) ?></td>
-                <td><?= h($message->thursday) ?></td>
-                <td><?= h($message->friday) ?></td>
-                <td><?= h($message->saturday) ?></td>
-                <td><?= h($message->sunday) ?></td>
                 <td><?= h($message->created) ?></td>
                 <td><?= h($message->ends) ?></td>
                 <td><?= h($message->active) ?></td>
