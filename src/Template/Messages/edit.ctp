@@ -36,8 +36,9 @@
             echo $this->Form->control('sunday');
             echo $this->Form->control('ends', ['empty' => true]);
             echo $this->Form->control('active');
-            echo $this->Form->control('times_planned');
         ?>
+		<?php echo "Times planned: $message->times_planned";
+		?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
