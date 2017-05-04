@@ -6,9 +6,9 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Message'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Voices'), ['controller' => 'Voices', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Voice'), ['controller' => 'Voices', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Nieuw bericht'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Bekijk stemmen'), ['controller' => 'Voices', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Nieuwe stem'), ['controller' => 'Voices', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="messages index large-9 medium-8 columns content">
