@@ -27,7 +27,7 @@
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Related Messages') ?></h4>
+        <h4><?= __('Ingesproken berichten') ?></h4>
         <?php if (!empty($voice->messages)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>

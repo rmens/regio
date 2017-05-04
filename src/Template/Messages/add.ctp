@@ -19,8 +19,8 @@
             echo $this->Form->control('name');
             echo $this->Form->control('path');
             echo $this->Form->control('voice_id', ['options' => $voices, 'empty' => true]);
-            echo $this->Form->control('start_date', ['empty' => true]);
-            echo $this->Form->control('end_date', ['empty' => true]);
+            echo $this->Form->control('start_date', ['default' => date('Y-m-d')]);
+            echo $this->Form->control('end_date', ['default' => date('Y-m-d')]);
             echo $this->Form->control('monday');
             echo $this->Form->control('tuesday');
             echo $this->Form->control('wednesday');
@@ -28,7 +28,7 @@
             echo $this->Form->control('friday');
             echo $this->Form->control('saturday');
             echo $this->Form->control('sunday');
-            echo $this->Form->control('ends', ['empty' => true]);
+			echo "<hr>";
             echo $this->Form->control('active');
         ?>
     </fieldset>

@@ -50,8 +50,8 @@
             <td><?= h($message->created) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Ends') ?></th>
-            <td><?= h($message->ends) ?></td>
+            <th scope="row"><?= __('Last played') ?></th>
+            <td><?= h($message->last_played) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Monday') ?></th>

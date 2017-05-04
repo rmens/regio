@@ -34,7 +34,13 @@ class AppView extends View
      *
      * @return void
      */
-    public function initialize()
-    {
-    }
-}
+	public function initialize()
+	{
+		$this->loadHelper('Form', [
+		            'templates' => [
+		                'dateWidget' => '{{day}}{{year}}{{month}}{{hour}}{{minute}}{{second}}{{meridian}}'
+		            ]
+		        ]);
+					}
+				}
+					
