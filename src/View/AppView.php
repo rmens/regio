@@ -38,7 +38,7 @@ class AppView extends View
 	{
 		$this->loadHelper('Form', [
 		            'templates' => [
-		                'dateWidget' => '{{day}}{{year}}{{month}}{{hour}}{{minute}}{{second}}{{meridian}}'
+		                'dateWidget' => '{{day}}{{month}}{{year}}{{hour}}{{minute}}{{second}}{{meridian}}'
 		            ]
 		        ]);
 					}
