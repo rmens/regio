@@ -37,7 +37,9 @@
 			echo "<hr>";
             echo $this->Form->control('active');
         ?>
-		<?php echo "Times planned: $message->times_planned";
+		<?php echo "Times planned: $message->times_planned"; 
+		echo "<br>";
+		echo "Last played: $message->last_played";
 		?>
     </fieldset>
     <?= $this->Form->button(__('OK')) ?>

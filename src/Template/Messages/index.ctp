@@ -23,7 +23,7 @@
                 <th scope="col"><?= $this->Paginator->sort('start_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('end_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('ends') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('last_played') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('active') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('times_planned') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
