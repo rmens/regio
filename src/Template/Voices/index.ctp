@@ -6,7 +6,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Acties') ?></li>
-        <li><?= $this->Html->link(__('Nieuw bericht'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Stem toevoegen'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('Bekijk berichten'), ['controller' => 'Messages', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Nieuw bericht'), ['controller' => 'Messages', 'action' => 'add']) ?></li>
     </ul>

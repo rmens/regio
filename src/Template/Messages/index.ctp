@@ -39,7 +39,7 @@
                 <td><?= h($message->start_date) ?></td>
                 <td><?= h($message->end_date) ?></td>
                 <td><?= h($message->created) ?></td>
-                <td><?= h($message->ends) ?></td>
+                <td><?= h($message->last_played) ?></td>
                 <td><?= h($message->active) ?></td>
                 <td><?= $this->Number->format($message->times_planned) ?></td>
                 <td class="actions">

@@ -37,15 +37,8 @@
                 <th scope="col"><?= __('Voice Id') ?></th>
                 <th scope="col"><?= __('Start Date') ?></th>
                 <th scope="col"><?= __('End Date') ?></th>
-                <th scope="col"><?= __('Monday') ?></th>
-                <th scope="col"><?= __('Tuesday') ?></th>
-                <th scope="col"><?= __('Wednesday') ?></th>
-                <th scope="col"><?= __('Thursday') ?></th>
-                <th scope="col"><?= __('Friday') ?></th>
-                <th scope="col"><?= __('Saturday') ?></th>
-                <th scope="col"><?= __('Sunday') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Ends') ?></th>
+                <th scope="col"><?= __('Last Played') ?></th>
                 <th scope="col"><?= __('Active') ?></th>
                 <th scope="col"><?= __('Times Planned') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -58,15 +51,8 @@
                 <td><?= h($messages->voice_id) ?></td>
                 <td><?= h($messages->start_date) ?></td>
                 <td><?= h($messages->end_date) ?></td>
-                <td><?= h($messages->monday) ?></td>
-                <td><?= h($messages->tuesday) ?></td>
-                <td><?= h($messages->wednesday) ?></td>
-                <td><?= h($messages->thursday) ?></td>
-                <td><?= h($messages->friday) ?></td>
-                <td><?= h($messages->saturday) ?></td>
-                <td><?= h($messages->sunday) ?></td>
                 <td><?= h($messages->created) ?></td>
-                <td><?= h($messages->ends) ?></td>
+                <td><?= h($messages->last_played) ?></td>
                 <td><?= h($messages->active) ?></td>
                 <td><?= h($messages->times_planned) ?></td>
                 <td class="actions">
