@@ -51,6 +51,8 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/', ['controller' => 'Messages', 'action' => 'index', 'home']);
 
+    $routes->connect('/playlist', ['controller' => 'Messages', 'action' => 'playlist']);
+
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */

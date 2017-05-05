@@ -23,8 +23,8 @@
         <legend><?= __('Bewerk bericht') ?></legend>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('path');
-            echo $this->Form->control('voice_id', ['options' => $voices, 'empty' => true]);
+            echo $this->Form->file('upload');
+            echo $this->Form->control('voice_id', ['options' => $voices]);
             echo $this->Form->control('start_date', ['default' => date('Y-m-d')]);
             echo $this->Form->control('end_date', ['default' => date('Y-m-d')]);
             echo $this->Form->control('monday');
@@ -37,7 +37,7 @@
 			echo "<hr>";
             echo $this->Form->control('active');
         ?>
-		<?php echo "Times planned: $message->times_planned"; 
+		<?php echo "Times planned: $message->times_planned";
 		echo "<br>";
 		echo "Last played: $message->last_played";
 		?>

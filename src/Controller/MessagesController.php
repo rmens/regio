@@ -11,6 +11,8 @@ use App\Controller\AppController;
 class MessagesController extends AppController
 {
 
+    const MESSAGECOUNT = 5;
+
     /**
      * Index method
      *
@@ -53,6 +55,16 @@ class MessagesController extends AppController
     {
         $message = $this->Messages->newEntity();
         if ($this->request->is('post')) {
+            if (!empty($this->request->getData('upload.name'))) {
+                $filename = ROOT . '/uploads/' . date('Ymd_His') . $this->request->getData('upload.name');
+                if (!file_exists(dirname($filename))) {
+                    mkdir(dirname($filename), 0777, true);
+                }
+                move_uploaded_file($this->request->getData('upload.tmp_name'), $filename);
+
+                $this->request = $this->request->withData('path', $filename);
+            }
+
             $message = $this->Messages->patchEntity($message, $this->request->getData());
             if ($this->Messages->save($message)) {
                 $this->Flash->success(__('The message has been saved.'));
@@ -79,6 +91,16 @@ class MessagesController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            if (!empty($this->request->getData('upload.name'))) {
+                $filename = ROOT . '/uploads/' . date('Ymd_His') . $this->request->getData('upload.name');
+                if (!file_exists(dirname($filename))) {
+                    mkdir(dirname($filename), 0777, true);
+                }
+                move_uploaded_file($this->request->getData('upload.tmp_name'), $filename);
+
+                $this->request = $this->request->withData('path', $filename);
+            }
+
             $message = $this->Messages->patchEntity($message, $this->request->getData());
             if ($this->Messages->save($message)) {
                 $this->Flash->success(__('The message has been saved.'));
@@ -110,5 +132,21 @@ class MessagesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function playlist()
+    {
+        $query = $this->Messages->find();
+        $dayFields = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+        $query->where(['active' => true])
+            ->andWhere(['start_date <=' => $query->func()->now('date')])
+            ->andWhere(['end_date >=' => $query->func()->now('date')])
+            ->andWhere([$dayFields[date('N') - 1] => true])
+            ->groupBy('voice')
+            ->sortBy('last_played');
+
+        $data = $query->all();
+        debug($data);
     }
 }

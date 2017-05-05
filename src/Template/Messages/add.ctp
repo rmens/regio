@@ -12,12 +12,12 @@
     </ul>
 </nav>
 <div class="messages form large-9 medium-8 columns content">
-    <?= $this->Form->create($message) ?>
+    <?= $this->Form->create($message, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Bericht toevoegen') ?></legend>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('path');
+            echo $this->Form->file('upload');
             echo $this->Form->control('voice_id', ['options' => $voices, 'empty' => true]);
             echo $this->Form->control('start_date', ['default' => date('Y-m-d')]);
             echo $this->Form->control('end_date', ['default' => date('Y-m-d')]);
