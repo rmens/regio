@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('path') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('voice_id') ?></th>
@@ -33,6 +34,7 @@
             <?php foreach ($messages as $message): ?>
             <tr>
                 <td><?= $this->Number->format($message->id) ?></td>
+                <td><?= h($message->status) ?></td>
                 <td><?= h($message->name) ?></td>
                 <td><?= h($message->path) ?></td>
                 <td><?= $message->has('voice') ? $this->Html->link($message->voice->name, ['controller' => 'Voices', 'action' => 'view', $message->voice->id]) : '' ?></td>

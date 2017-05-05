@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Entity;
 
+use Cake\Chronos\Chronos;
 use Cake\ORM\Entity;
 
 /**
@@ -42,4 +43,17 @@ class Message extends Entity
         '*' => true,
         'id' => false
     ];
+
+    protected function _getStatus()
+    {
+        if (Chronos::today()->gt($this->_properties['end_date'])) {
+            return 'verlopen';
+        }
+
+        if ($this->_properties['active'] && Chronos::today()->gte($this->_properties['start_date'])) {
+            return 'actief';
+        }
+
+        return 'inactief';
+    }
 }
