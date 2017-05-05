@@ -21,7 +21,7 @@ use Cake\ORM\Entity;
  * @property bool $saturday
  * @property bool $sunday
  * @property \Cake\I18n\Time $created
- * @property \Cake\I18n\Time $ends
+ * @property \Cake\I18n\Time $last_played
  * @property bool $active
  * @property int $times_planned
  *

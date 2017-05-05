@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
+use App\Model\Entity\Message;
+use Cake\Chronos\Chronos;
+use Zend\Diactoros\Stream;
 
 /**
  * Messages Controller
@@ -11,7 +13,7 @@ use App\Controller\AppController;
 class MessagesController extends AppController
 {
 
-    const MESSAGECOUNT = 5;
+    const MESSAGECOUNT_MAX = 3;
 
     /**
      * Index method
@@ -136,17 +138,36 @@ class MessagesController extends AppController
 
     public function playlist()
     {
+        // TODO limit by voice
         $query = $this->Messages->find();
         $dayFields = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
-        $query->where(['active' => true])
+        $data = $query->where(['active' => true])
             ->andWhere(['start_date <=' => $query->func()->now('date')])
             ->andWhere(['end_date >=' => $query->func()->now('date')])
             ->andWhere([$dayFields[date('N') - 1] => true])
-            ->groupBy('voice')
-            ->sortBy('last_played');
+            ->sortBy('last_played', SORT_ASC);
 
-        $data = $query->all();
-        debug($data);
+        $messages = $data->take(self::MESSAGECOUNT_MAX, 0)->shuffle();
+
+        /** @var Message $message */
+        foreach ($messages as $message) {
+            $message->last_played = Chronos::now();
+            $message->times_planned += 1;
+        }
+        $this->Messages->saveMany($messages->toArray());
+
+        $line = '';
+        foreach ($messages as $message) {
+            $line .= $message->name . ';' . $message->path . PHP_EOL;
+        }
+
+        $stream = fopen('php://temp', 'r+');
+        fwrite($stream, $line);
+        fseek($stream, 0);
+
+        return $this->response
+            ->withBody(new Stream($stream))
+            ->withAddedHeader('Content-Type', 'text/plain; charset=utf-8');
     }
 }
