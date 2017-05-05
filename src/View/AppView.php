@@ -34,13 +34,13 @@ class AppView extends View
      *
      * @return void
      */
-	public function initialize()
-	{
-		$this->loadHelper('Form', [
-		            'templates' => [
-		                'dateWidget' => '{{day}}{{month}}{{year}}{{hour}}{{minute}}{{second}}{{meridian}}'
-		            ]
-		        ]);
-					}
-				}
+    public function initialize()
+    {
+        $this->loadHelper('Form', [
+            'templates' => [
+                'dateWidget' => '{{day}}{{month}}{{year}}{{hour}}{{minute}}{{second}}{{meridian}}'
+            ]
+        ]);
+    }
+}
 					
