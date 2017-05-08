@@ -50,9 +50,9 @@
                 <td><?= h($messages->last_played) ?></td>
                 <td><?= h($messages->times_planned) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Messages', 'action' => 'view', $messages->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Messages', 'action' => 'edit', $messages->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Messages', 'action' => 'delete', $messages->id], ['confirm' => __('Are you sure you want to delete # {0}?', $messages->id)]) ?>
+                    <?= $this->Html->link(__('🔎'), ['controller' => 'Messages', 'action' => 'view', $messages->id]) ?>
+                    <?= $this->Html->link(__('✏️'), ['controller' => 'Messages', 'action' => 'edit', $messages->id]) ?>
+                    <?= $this->Form->postLink(__('❌'), ['controller' => 'Messages', 'action' => 'delete', $messages->id], ['confirm' => __('Are you sure you want to delete # {0}?', $messages->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

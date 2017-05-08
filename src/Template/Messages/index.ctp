@@ -41,9 +41,9 @@
                 <td><?= h($message->last_played) ?></td>
                 <td><?= $this->Number->format($message->times_planned) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $message->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $message->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $message->id], ['confirm' => __('Are you sure you want to delete # {0}?', $message->id)]) ?>
+                    <?= $this->Html->link(__('🔎'), ['action' => 'view', $message->id]) ?>
+                    <?= $this->Html->link(__('✏️'), ['action' => 'edit', $message->id]) ?>
+                    <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $message->id], ['confirm' => __('Weet je zeker dat je # {0} wil verwijderen?', $message->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
