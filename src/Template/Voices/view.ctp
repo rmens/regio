@@ -33,13 +33,10 @@
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Name') ?></th>
-                <th scope="col"><?= __('Path') ?></th>
-                <th scope="col"><?= __('Voice Id') ?></th>
                 <th scope="col"><?= __('Start Date') ?></th>
                 <th scope="col"><?= __('End Date') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Last Played') ?></th>
-                <th scope="col"><?= __('Active') ?></th>
                 <th scope="col"><?= __('Times Planned') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -47,13 +44,10 @@
             <tr>
                 <td><?= h($messages->id) ?></td>
                 <td><?= h($messages->name) ?></td>
-                <td><?= h($messages->path) ?></td>
-                <td><?= h($messages->voice_id) ?></td>
                 <td><?= h($messages->start_date) ?></td>
                 <td><?= h($messages->end_date) ?></td>
                 <td><?= h($messages->created) ?></td>
                 <td><?= h($messages->last_played) ?></td>
-                <td><?= h($messages->active) ?></td>
                 <td><?= h($messages->times_planned) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Messages', 'action' => 'view', $messages->id]) ?>
