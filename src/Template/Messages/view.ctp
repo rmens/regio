@@ -8,7 +8,7 @@
         <li class="heading"><?= __('Acties') ?></li>
         <li><?= $this->Html->link(__('Bewerk bericht'), ['action' => 'edit', $message->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Verwijder bericht'), ['action' => 'delete', $message->id], ['confirm' => __('Are you sure you want to delete # {0}?', $message->id)]) ?> </li>
-        <li><?= $this->Html->link(__('Bekijk berichtens'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('Bekijk berichten'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nieuw bericht'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('Bekijk stemmen'), ['controller' => 'Voices', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('Nieuwe stem'), ['controller' => 'Voices', 'action' => 'add']) ?> </li>
