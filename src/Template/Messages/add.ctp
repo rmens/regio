@@ -32,6 +32,6 @@
             echo $this->Form->control('active');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Voeg toe')) ?>
+    <?= $this->Form->button(__('Toevoegen')) ?>
     <?= $this->Form->end() ?>
 </div>

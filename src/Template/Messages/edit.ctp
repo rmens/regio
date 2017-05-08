@@ -42,6 +42,6 @@
 		echo "Last played: $message->last_played";
 		?>
     </fieldset>
-    <?= $this->Form->button(__('OK')) ?>
+    <?= $this->Form->button(__('Bewerk')) ?>
     <?= $this->Form->end() ?>
 </div>

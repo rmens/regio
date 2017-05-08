@@ -9,7 +9,7 @@
         <li><?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $voice->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $voice->id)]
+                ['confirm' => __('Weet je zeker dat je # {0} wil verwijderen?', $voice->id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('Bekijk stemmen'), ['action' => 'index']) ?></li>
@@ -25,6 +25,6 @@
             echo $this->Form->control('name');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Bewerk')) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -5,14 +5,14 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
+        <li class="heading"><?= __('Acties') ?></li>
         <li><?= $this->Html->link(__('Nieuw bericht'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('Bekijk stemmen'), ['controller' => 'Voices', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Nieuwe stem'), ['controller' => 'Voices', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="messages index large-9 medium-8 columns content">
-    <h3><?= __('Messages') ?></h3>
+    <h3><?= __('Berichten') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -25,7 +25,7 @@
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('last_played') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('times_planned') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col" class="actions"><?= __('Acties') ?></th>
             </tr>
         </thead>
         <tbody>

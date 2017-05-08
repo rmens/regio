@@ -18,7 +18,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col" class="actions"><?= __('Acties') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -27,9 +27,9 @@
                 <td><?= $this->Number->format($voice->id) ?></td>
                 <td><?= h($voice->name) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $voice->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $voice->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $voice->id], ['confirm' => __('Are you sure you want to delete # {0}?', $voice->id)]) ?>
+                    <?= $this->Html->link(__('🔎'), ['action' => 'view', $voice->id]) ?>
+                    <?= $this->Html->link(__('✏️'), ['action' => 'edit', $voice->id]) ?>
+                    <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $voice->id], ['confirm' => __('Weet je zeker dat je # {0} wil verwijderen?', $voice->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

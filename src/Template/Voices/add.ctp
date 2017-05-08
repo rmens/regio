@@ -14,11 +14,11 @@
 <div class="voices form large-9 medium-8 columns content">
     <?= $this->Form->create($voice) ?>
     <fieldset>
-        <legend><?= __('Stem voegen') ?></legend>
+        <legend><?= __('Stem toevoegen') ?></legend>
         <?php
             echo $this->Form->control('name');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Toevoegen')) ?>
     <?= $this->Form->end() ?>
 </div>
