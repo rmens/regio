@@ -14,7 +14,7 @@
         ?></li>
         <li><?= $this->Html->link(__('Bekijk stemmen'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Bekijk berichten'), ['controller' => 'Messages', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('Nieuw bericht, ['controller' => 'Messages', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Nieuw bericht', ['controller' => 'Messages', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="voices form large-9 medium-8 columns content">

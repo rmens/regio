@@ -19,13 +19,11 @@
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('path') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('voice_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('start_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('end_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('last_played') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('active') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('times_planned') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -36,13 +34,11 @@
                 <td><?= $this->Number->format($message->id) ?></td>
                 <td><?= h($message->status) ?></td>
                 <td><?= h($message->name) ?></td>
-                <td><?= h($message->path) ?></td>
                 <td><?= $message->has('voice') ? $this->Html->link($message->voice->name, ['controller' => 'Voices', 'action' => 'view', $message->voice->id]) : '' ?></td>
                 <td><?= h($message->start_date) ?></td>
                 <td><?= h($message->end_date) ?></td>
                 <td><?= h($message->created) ?></td>
                 <td><?= h($message->last_played) ?></td>
-                <td><?= h($message->active) ?></td>
                 <td><?= $this->Number->format($message->times_planned) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $message->id]) ?>
