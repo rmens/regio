@@ -136,6 +136,49 @@ class MessagesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * @param $messages Message[]
+     */
+    private function pickRandomWeighted($messages)
+    {
+        $times = array_map(function (Message $message) {
+            if ($message->last_played == null) {
+                return null;
+            }
+
+            return $message->last_played->timestamp;
+        }, $messages);
+
+        // Remove `null`
+        $times = array_filter($times);
+
+        // Remove duplicate times
+        $times = array_unique($times);
+
+        // Sort highest to lowest (most-recent to last-recent)
+        rsort($times);
+
+        // Add null element aat the end so unplayed items have more weight
+        $times[] = null;
+
+        $weighted = [];
+        foreach ($messages as $message) {
+            $time = ($message->last_played == null) ? null : $message->last_played->timestamp;
+
+            // Gets 0-based array index
+            $weight = array_search($time, $times);
+            $weight += 1;
+
+            for ($i = 0; $i < $weight; $i++) {
+                $weighted[] = $message;
+            }
+        }
+
+        $randomIndex = array_rand($weighted);
+
+        return $weighted[$randomIndex];
+    }
+
     public function playlist()
     {
         // TODO limit by voice
@@ -146,16 +189,29 @@ class MessagesController extends AppController
             ->andWhere(['start_date <=' => $query->func()->now('date')])
             ->andWhere(['end_date >=' => $query->func()->now('date')])
             ->andWhere([$dayFields[date('N') - 1] => true])
-            ->sortBy('last_played', SORT_ASC);
+            ->orderAsc('last_played');
 
-        $messages = $data->take(self::MESSAGECOUNT_MAX, 0)->shuffle();
+        $all = $data->toList();
+
+        $messages = [];
+        for ($i = 0; $i < self::MESSAGECOUNT_MAX; $i++) {
+            $pickedMeesage = $this->pickRandomWeighted($all);
+            if ($pickedMeesage === false) {
+                break;
+            }
+
+            $index = array_search($pickedMeesage, $all);
+            unset($all[$index]);
+
+            $messages[] = $pickedMeesage;
+        }
 
         /** @var Message $message */
         foreach ($messages as $message) {
             $message->last_played = Chronos::now();
             $message->times_planned += 1;
         }
-        $this->Messages->saveMany($messages->toArray());
+        $this->Messages->saveMany($messages);
 
         $line = '';
         foreach ($messages as $message) {
