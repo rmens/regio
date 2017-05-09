@@ -141,6 +141,10 @@ class MessagesController extends AppController
      */
     private function pickRandomWeighted($messages)
     {
+        if (count($messages) === 0) {
+            return false;
+        }
+
         $times = array_map(function (Message $message) {
             if ($message->last_played == null) {
                 return null;
