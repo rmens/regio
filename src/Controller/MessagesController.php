@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Model\Entity\Message;
 use Cake\Chronos\Chronos;
+use Cake\Core\Configure;
+use Exception;
 use Zend\Diactoros\Stream;
 
 /**
@@ -210,6 +212,10 @@ class MessagesController extends AppController
             $messages[] = $pickedMeesage;
         }
 
+        if (count($messages) === 0) {
+            return;
+        }
+
         /** @var Message $message */
         foreach ($messages as $message) {
             $message->last_played = Chronos::now();
@@ -217,17 +223,23 @@ class MessagesController extends AppController
         }
         $this->Messages->saveMany($messages);
 
-        $line = '';
-        foreach ($messages as $message) {
-            $line .= $message->name . ';' . $message->path . PHP_EOL;
+        $args = array_map(function (Message $msg) {
+            return escapeshellarg($msg->path);
+        }, $messages);
+
+        $tempPath = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
+        $sox = Configure::read('sox');
+        if ($sox === null) {
+            throw new Exception("No 'sox' configured");
         }
 
-        $stream = fopen('php://temp', 'r+');
-        fwrite($stream, $line);
-        fseek($stream, 0);
+        $cmd = escapeshellcmd($sox) . ' ' . implode(' ', $args) . ' ' . escapeshellarg($tempPath);
+        exec($cmd);
+
+        $stream = fopen($tempPath, 'r+');
 
         return $this->response
             ->withBody(new Stream($stream))
-            ->withAddedHeader('Content-Type', 'text/plain; charset=utf-8');
+            ->withAddedHeader('Content-Type', 'audio/wav');
     }
 }
