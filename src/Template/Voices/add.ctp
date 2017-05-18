@@ -17,6 +17,7 @@
         <legend><?= __('Stem toevoegen') ?></legend>
         <?php
             echo $this->Form->control('name');
+            echo $this->Form->control('namejingle');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Toevoegen')) ?>
