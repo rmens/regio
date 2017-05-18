@@ -25,6 +25,10 @@
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($voice->id) ?></td>
         </tr>
+        <tr>
+            <th scope="row"><?= __('namejingle') ?></th>
+            td><?= h($voice->namejingle) ?></td>
+        </tr>
     </table>
     <div class="related">
         <h4><?= __('Ingesproken berichten') ?></h4>
