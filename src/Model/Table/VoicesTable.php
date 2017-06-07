@@ -54,7 +54,14 @@ class VoicesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->notBlank('name');
+            ->allowEmpty('name');
+
+        $validator
+            ->allowEmpty('namejingle');
+
+        $validator
+            ->integer('namejinglemixpoint')
+            ->allowEmpty('namejinglemixpoint');
 
         return $validator;
     }

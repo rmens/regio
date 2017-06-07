@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Model\Entity\Message;
+use App\Model\Entity\Voice;
 use Cake\Chronos\Chronos;
 use Cake\Core\Configure;
 use Exception;
@@ -250,6 +251,9 @@ class MessagesController extends AppController
         $this->Messages->saveMany($messages);
 
         $tempPath = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
+        $silence = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
+        $finalPath = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
+
         $sox = Configure::read('sox');
         if ($sox === null) {
             throw new Exception("No 'sox' configured");
@@ -259,8 +263,7 @@ class MessagesController extends AppController
         if ($pause === null) {
             $pause = 0.5;
         }
-        $silence = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
-        $pauseCmd = sprintf('%s -n -r 44100 -c 2 %s trim 0.0 %d', escapeshellcmd($sox), escapeshellarg($silence), floatval($pause));
+        $pauseCmd = sprintf('%s -n -r 44100 -c 2 %s trim 0.0 %F', escapeshellcmd($sox), escapeshellarg($silence), floatval($pause));
         exec($pauseCmd);
 
         $args = [];
@@ -274,10 +277,26 @@ class MessagesController extends AppController
         $cmd = escapeshellcmd($sox) . ' ' . implode(' ', $args) . ' ' . escapeshellarg($tempPath);
         exec($cmd);
 
-        // Delete silence
-        unlink($silence);
+        $voiceId = end($messages)->voice_id;
 
-        $stream = fopen($tempPath, 'r+');
+        /** @var Voice $voice */
+        $voice = $this->Messages->Voices->get($voiceId);
+
+        $cmd = sprintf('%1$s %2$s -p pad %4$F 0 | %1$s - -m %3$s %4$s norm',
+            escapeshellcmd($sox),
+            escapeshellarg($tempPath),
+            escapeshellarg($voice->namejingle),
+            floatval($voice->namejinglemixpoint),
+            escapeshellarg($finalPath));
+
+        debug($cmd);
+        die();
+
+        // Delete temporary files
+        unlink($silence);
+        unlink($tempPath);
+
+        $stream = fopen($finalPath, 'r+');
 
         return $this->response
             ->withBody(new Stream($stream))

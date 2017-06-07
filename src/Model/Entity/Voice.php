@@ -8,6 +8,8 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
+ * @property string $namejingle
+ * @property int $namejinglemixpoint
  *
  * @property \App\Model\Entity\Message[] $messages
  */
