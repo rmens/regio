@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('namejingle') ?></th>
-            td><?= h($voice->namejingle) ?></td>
+            <td><?= h($voice->namejingle) ?></td>
         </tr>
     </table>
     <div class="related">
