@@ -288,7 +288,7 @@ class MessagesController extends AppController
         /** @var Voice $voice */
         $voice = $this->Messages->Voices->get($voiceId);
 
-        $cmd = sprintf('%1$s %2$s -p pad %4$F 0 | %1$s - -m %3$s %4$s norm',
+        $cmd = sprintf('%1$s %2$s -p pad %4$F 0 | %1$s - -m %3$s %5$s norm',
             escapeshellcmd($sox),
             escapeshellarg($tempPath),
             escapeshellarg($voice->namejingle),
