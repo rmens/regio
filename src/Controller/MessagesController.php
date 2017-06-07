@@ -289,8 +289,7 @@ class MessagesController extends AppController
             floatval($voice->namejinglemixpoint),
             escapeshellarg($finalPath));
 
-        debug($cmd);
-        die();
+        exec($cmd);
 
         // Delete temporary files
         unlink($silence);
