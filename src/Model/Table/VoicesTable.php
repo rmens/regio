@@ -60,7 +60,7 @@ class VoicesTable extends Table
             ->allowEmpty('namejingle');
 
         $validator
-            ->integer('namejinglemixpoint')
+            ->numeric('namejinglemixpoint')
             ->allowEmpty('namejinglemixpoint');
 
         return $validator;
