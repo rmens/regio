@@ -18,12 +18,13 @@
     </ul>
 </nav>
 <div class="voices form large-9 medium-8 columns content">
-    <?= $this->Form->create($voice) ?>
+    <?= $this->Form->create($voice, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Bewerk stem') ?></legend>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('namejingle');
+            echo $this->Form->file('upload');
+            echo $this->Form->control('namejinglemixpoint');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Bewerk')) ?>

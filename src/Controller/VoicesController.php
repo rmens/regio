@@ -1,8 +1,6 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
-
 /**
  * Voices Controller
  *
@@ -41,6 +39,19 @@ class VoicesController extends AppController
         $this->set('_serialize', ['voice']);
     }
 
+
+    private function processUpload()
+    {
+        if (!empty($this->request->getData('upload.name'))) {
+            $filename = ROOT . '/uploads/' . date('Ymd_His') . $this->request->getData('upload.name');
+            if (!file_exists(dirname($filename))) {
+                mkdir(dirname($filename), 0777, true);
+            }
+            move_uploaded_file($this->request->getData('upload.tmp_name'), $filename);
+            $this->request = $this->request->withData('namejingle', $filename);
+        }
+    }
+
     /**
      * Add method
      *
@@ -50,6 +61,7 @@ class VoicesController extends AppController
     {
         $voice = $this->Voices->newEntity();
         if ($this->request->is('post')) {
+            $this->processUpload();
             $voice = $this->Voices->patchEntity($voice, $this->request->getData());
             if ($this->Voices->save($voice)) {
                 $this->Flash->success(__('The voice has been saved.'));
@@ -75,6 +87,7 @@ class VoicesController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $this->processUpload();
             $voice = $this->Voices->patchEntity($voice, $this->request->getData());
             if ($this->Voices->save($voice)) {
                 $this->Flash->success(__('The voice has been saved.'));
