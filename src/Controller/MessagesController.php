@@ -64,7 +64,20 @@ class MessagesController extends AppController
                 if (!file_exists(dirname($filename))) {
                     mkdir(dirname($filename), 0777, true);
                 }
-                move_uploaded_file($this->request->getData('upload.tmp_name'), $filename);
+
+                $sox = Configure::read('sox');
+                if ($sox === null) {
+                    throw new Exception("No 'sox' configured");
+                }
+
+                move_uploaded_file($this->request->getData('upload.tmp_name'), $filename . '.tmp');
+
+                $cmd = sprintf('%s %s %s norm vad reverse vad reverse',
+                    escapeshellcmd($sox),
+                    escapeshellarg($filename . '.tmp'),
+                    escapeshellarg($filename));
+                exec($cmd);
+                unlink($filename . '.tmp');
 
                 $this->request = $this->request->withData('path', $filename);
             }
@@ -100,7 +113,20 @@ class MessagesController extends AppController
                 if (!file_exists(dirname($filename))) {
                     mkdir(dirname($filename), 0777, true);
                 }
-                move_uploaded_file($this->request->getData('upload.tmp_name'), $filename);
+
+                $sox = Configure::read('sox');
+                if ($sox === null) {
+                    throw new Exception("No 'sox' configured");
+                }
+
+                move_uploaded_file($this->request->getData('upload.tmp_name'), $filename . '.tmp');
+
+                $cmd = sprintf('%s %s %s norm vad reverse vad reverse',
+                    escapeshellcmd($sox),
+                    escapeshellarg($filename . '.tmp'),
+                    escapeshellarg($filename));
+                exec($cmd);
+                unlink($filename . '.tmp');
 
                 $this->request = $this->request->withData('path', $filename);
             }
