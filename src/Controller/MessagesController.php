@@ -264,7 +264,8 @@ class MessagesController extends AppController
             $pause = 0.5;
         }
         $pauseCmd = sprintf('%s -n -r 44100 -c 2 %s trim 0.0 %F', escapeshellcmd($sox), escapeshellarg($silence), floatval($pause));
-        exec($pauseCmd);
+        exec($pauseCmd, $out);
+        dump($out);
 
         $args = [];
         foreach ($messages as $msg) {
@@ -275,7 +276,8 @@ class MessagesController extends AppController
         array_pop($args);
 
         $cmd = escapeshellcmd($sox) . ' ' . implode(' ', $args) . ' ' . escapeshellarg($tempPath);
-        exec($cmd);
+        exec($cmd, $out);
+        dump($out);
 
         $voiceId = end($messages)->voice_id;
 
@@ -289,7 +291,8 @@ class MessagesController extends AppController
             floatval($voice->namejinglemixpoint),
             escapeshellarg($finalPath));
 
-        exec($cmd);
+        exec($cmd, $out);
+        dump($out);
 
         // Delete temporary files
         unlink($silence);
