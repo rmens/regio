@@ -12,6 +12,7 @@ return [
     'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
 
     'sox' => '/usr/local/bin/sox',
+    'pause' => 2.0,
 
     /**
      * Configure basic information about the application.

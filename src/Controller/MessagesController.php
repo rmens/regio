@@ -239,7 +239,7 @@ class MessagesController extends AppController
         }
 
         if (count($messages) === 0) {
-            return;
+            throw new Exception("Empty playlist");
         }
 
         /** @var Message $message */
@@ -249,18 +249,33 @@ class MessagesController extends AppController
         }
         $this->Messages->saveMany($messages);
 
-        $args = array_map(function (Message $msg) {
-            return escapeshellarg($msg->path);
-        }, $messages);
-
         $tempPath = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
         $sox = Configure::read('sox');
         if ($sox === null) {
             throw new Exception("No 'sox' configured");
         }
 
+        $pause = Configure::read('pause');
+        if ($pause === null) {
+            $pause = 0.5;
+        }
+        $silence = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
+        $pauseCmd = sprintf('%s -n -r 44100 -c 2 %s trim 0.0 %d', escapeshellcmd($sox), escapeshellarg($silence), floatval($pause));
+        exec($pauseCmd);
+
+        $args = [];
+        foreach ($messages as $msg) {
+            $args[] = escapeshellarg($msg->path);
+            $args[] = escapeshellarg($silence);
+        }
+        // Remove the last element (silence)
+        array_pop($args);
+
         $cmd = escapeshellcmd($sox) . ' ' . implode(' ', $args) . ' ' . escapeshellarg($tempPath);
         exec($cmd);
+
+        // Delete silence
+        unlink($silence);
 
         $stream = fopen($tempPath, 'r+');
 
