@@ -2,3 +2,7 @@
 /config/app.php
 /tmp/*
 /logs/*
+
+*.mp3
+
+*.wav
