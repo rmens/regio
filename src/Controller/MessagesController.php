@@ -73,7 +73,7 @@ class MessagesController extends AppController
 
                 move_uploaded_file($this->request->getData('upload.tmp_name'), $filename . '.tmp');
 
-                $cmd = sprintf('%s %s %s norm vad reverse vad reverse',
+                $cmd = sprintf('%s %s %s norm',
                     escapeshellcmd($sox),
                     escapeshellarg($filename . '.tmp'),
                     escapeshellarg($filename));
