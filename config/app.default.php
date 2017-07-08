@@ -12,6 +12,7 @@ return [
     'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
 
     'sox' => '/usr/local/bin/sox',
+    'soxi' => '/usr/local/bin/soxi',
     'pause' => 2.0,
 
     /**
