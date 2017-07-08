@@ -11,6 +11,8 @@
 - Config invullen (```/config/app.default.php``` opslaan als ```/config/app.php```)
 - Composer draaien in uitgepakte dir (```composer install```)
 - Database patchen in uitgepakte dir (```./bin/cake migrations migrate```)
+- Uploads directory maken (```mkdir /var/www/regio/uploads/```)
+- Uploads directory ```chmod 777``` geven en chownen op ```www-data:www-data```
 
 # Webserver configureren
 - Nieuwe vhost aanmaken en die de webroot ```/var/www/regio/webroot/``` geven
