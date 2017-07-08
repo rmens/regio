@@ -14,4 +14,31 @@
 
 # Webserver configureren
 - Nieuwe vhost aanmaken en die de webroot ```/var/www/regio/webroot/``` geven
+- Gemaakte vhost enablen (```a2ensite 001-regio.conf```)
 - Rewrite module aanzetten (```a2enmod rewrite```)
+
+# Voorbeeld virtualhost
+```
+<VirtualHost *:80>
+	ServerName zuidwestupdate.nl
+	ServerAlias www.zuidwestupdate.nl
+	ServerAdmin info@zuidwestfm.nl
+	DocumentRoot /var/www/regio/webroot
+
+	LogLevel warn
+	ErrorLog ${APACHE_LOG_DIR}/regio.error.log
+	CustomLog ${APACHE_LOG_DIR}/regio.access.log combined
+
+       <Directory />
+           Options FollowSymLinks
+           AllowOverride All
+       </Directory>
+
+       <Directory /var/www>
+           Options Indexes FollowSymLinks MultiViews
+           AllowOverride All
+           Order Allow,Deny
+           Allow from all
+        </Directory>
+</VirtualHost>
+```
