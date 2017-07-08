@@ -18,6 +18,7 @@
 - Nieuwe vhost aanmaken en die de webroot ```/var/www/regio/webroot/``` geven
 - Gemaakte vhost enablen (```a2ensite 001-regio.conf```)
 - Rewrite module aanzetten (```a2enmod rewrite```)
+- PHP settings aanpassen: ```upload_max_filesize = 1000M;``` en ```post_max_size = 1000M;```
 
 # Voorbeeld virtualhost
 ```
