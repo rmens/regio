@@ -11,3 +11,7 @@
 - Config invullen (```/config/app.default.php``` opslaan als ```/config/app.php```)
 - Composer draaien in uitgepakte dir (```composer install```)
 - Database patchen in uitgepakte dir (```./bin/cake migrations migrate```)
+
+# Webserver configureren
+- Nieuwe vhost aanmaken en die de webroot ```/var/www/regio/webroot/``` geven
+- Rewrite module aanzetten (```a2enmod rewrite```)
