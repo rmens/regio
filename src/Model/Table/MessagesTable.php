@@ -1,7 +1,9 @@
 <?php
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
+use App\Model\Entity\Message;
+use ArrayObject;
+use Cake\Event\Event;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -134,5 +136,12 @@ class MessagesTable extends Table
         $rules->add($rules->existsIn(['voice_id'], 'Voices'));
 
         return $rules;
+    }
+
+    public function afterDelete(Event $event, Message $entity, ArrayObject $options)
+    {
+        if (file_exists($entity->path)) {
+            unlink($entity->path);
+        }
     }
 }
