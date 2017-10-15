@@ -24,7 +24,8 @@ class PruneShell extends Shell
         ]);
         /** @var Message[] $messages */
         $messages = $query->all();
-
+        debug($messages);
+        return;
         if ($query->isEmpty()) {
             $this->out('No outdated messages found.');
             return true;
