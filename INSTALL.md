@@ -45,3 +45,6 @@
         </Directory>
 </VirtualHost>
 ```
+
+# Cron voor cleaning aanmaken
+Om oude berichten automatisch op te ruimen, dient een cronjob ingesteld te worden. Je kunt zelf de frequentie bepalen. Voeg dit op bijvoorbeeld Debian aan ```/etc/cron.daily``` toe: ```/var/www/regio/bin/cake prune```
