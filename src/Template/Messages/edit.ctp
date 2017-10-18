@@ -18,7 +18,7 @@
     </ul>
 </nav>
 <div class="messages form large-9 medium-8 columns content">
-    <?= $this->Form->create($message) ?>
+    <?= $this->Form->create($message, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Bewerk bericht') ?></legend>
         <?php
