@@ -11,8 +11,10 @@ return [
      */
     'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
 
-    'ffmpeg' => '/usr/local/bin/ffmpeg',
-    'pause' => 2.0,
+    'sox' => '/usr/bin/sox',
+    'soxi' => '/usr/bin/soxi',
+    'ffmpeg' => '/usr/bin/ffmpeg',
+    'pause' => 1,
 
     /**
      * Configure basic information about the application.
