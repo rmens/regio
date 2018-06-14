@@ -1,6 +1,6 @@
 # Server voorbereieden
 - LAMP Stack aanmaken (Linux, Apache2, MySQL, PHP)
-- Sox installeren (```apt install sox```)
+- Sox en ffmpeg installeren (```apt install sox ffmpeg```)
 - PHP Modules installeren (```php7.0-mysql```, ```php7.0-intl```, ```php7.0-mbstring```)
 - Composer installeren (```apt install composer```)
 - Database aanmaken 
