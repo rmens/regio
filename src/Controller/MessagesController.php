@@ -250,59 +250,47 @@ class MessagesController extends AppController
         }
         $this->Messages->saveMany($messages);
 
-        $tempPath = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
-        $silence = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
         $finalPath = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
 
-        $sox = Configure::read('sox');
-        if ($sox === null) {
-            throw new Exception("No 'sox' configured");
+        $ffmpeg = Configure::read('ffmpeg');
+        if ($ffmpeg === null) {
+            throw new Exception("No 'ffmpeg' configured");
         }
-
-        $soxi = Configure::read('soxi');
-        if ($soxi === null) {
-            throw new Exception("No 'soxi' configured");
-        }
-
-        $pause = Configure::read('pause');
-        if ($pause === null) {
-            $pause = 0.5;
-        }
-        $pauseCmd = sprintf('%s -n -r 44100 -c 2 %s trim 0.0 %F', escapeshellcmd($sox), escapeshellarg($silence), floatval($pause));
-        exec($pauseCmd);
-
-        $args = [];
-        foreach ($messages as $msg) {
-            $args[] = escapeshellarg($msg->path);
-            $args[] = escapeshellarg($silence);
-        }
-        // Remove the last element (silence)
-        array_pop($args);
-
-        $cmd = escapeshellcmd($sox) . ' ' . implode(' ', $args) . ' ' . escapeshellarg($tempPath);
-        exec($cmd);
-
-        $cmd = sprintf('%s -D %s', escapeshellcmd($soxi), escapeshellarg($tempPath));
-        $duration = floatval(exec($cmd));
 
         $voiceId = end($messages)->voice_id;
 
         /** @var Voice $voice */
         $voice = $this->Messages->Voices->get($voiceId);
 
-        $cmd = sprintf('%1$s %2$s -p pad %4$F 0 | %1$s - -m %3$s -p norm | %1$s -p %6$s trim 0 %5$F',
-            escapeshellcmd($sox),
-            escapeshellarg($tempPath),
-            escapeshellarg($voice->namejingle),
-            floatval($voice->namejinglemixpoint),
-            floatval($voice->namejinglemixpoint) + $duration,
-            escapeshellarg($finalPath));
+        $args = [];
+        $filters = [];
+        $args[] = '-i ' . escapeshellarg($voice->namejingle);
+        $concatFilter = '';
 
-        exec($cmd);
+        $i = 0;
+        $delay = $voice->namejinglemixpoint * 1000;
+        $pause = Configure::read('pause') * 1000;
+        foreach ($messages as $msg) {
+            $i++;
+            $filters[] = sprintf('[%1$d]adelay=%2$d|%2$d[%1$dd]', $i, $delay);
 
-        // Delete temporary files
-        unlink($silence);
-        unlink($tempPath);
+            $args[] = '-i ' . escapeshellarg($msg->path);
+            $concatFilter .= sprintf('[%dd]', $i);
+
+            // Every delay but the first one is a pause
+            $delay = $pause;
+        }
+
+        $concatFilter .= sprintf('concat=n=%d:v=0:a=1[a0]', count($messages));
+        $filters[] = $concatFilter;
+        $filters[] = '[a0][0:0]amix=duration=shortest';
+        $args[] = '-filter_complex ' . escapeshellarg(implode(';', $filters));
+        $args[] = '-y ' . escapeshellarg($finalPath);
+
+        $cmd = escapeshellcmd($ffmpeg) . ' ' . implode(' ', $args);
+
+        echo $cmd;
+        die();
 
         $stream = fopen($finalPath, 'r+');
 
