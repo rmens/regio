@@ -248,7 +248,7 @@ class MessagesController extends AppController
             $message->last_played = Chronos::now();
             $message->times_planned += 1;
         }
-        // $this->Messages->saveMany($messages);
+        $this->Messages->saveMany($messages);
 
         $finalPath = tempnam(sys_get_temp_dir(), 'regio') . '.wav';
 
@@ -289,8 +289,7 @@ class MessagesController extends AppController
 
         $cmd = escapeshellcmd($ffmpeg) . ' ' . implode(' ', $args);
 
-        echo $cmd;
-        die();
+        exec($cmd);
 
         $stream = fopen($finalPath, 'r+');
 
